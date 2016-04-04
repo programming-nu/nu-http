@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2203867F18D6BB330091A43B /* RadLibEVHTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2203867E18D6BB330091A43B /* RadLibEVHTPServer.m */; };
-		22E9FD351745F55500FE9B01 /* RadHTTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E9FD341745F55500FE9B01 /* RadHTTPService.m */; };
+		2203867F18D6BB330091A43B /* NuLibEVHTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2203867E18D6BB330091A43B /* NuLibEVHTPServer.m */; };
+		22E9FD351745F55500FE9B01 /* NuHTTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E9FD341745F55500FE9B01 /* NuHTTPService.m */; };
 		22FF922E174592DB00ADC59E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FF922D174592DB00ADC59E /* Foundation.framework */; };
-		22FF92501745939E00ADC59E /* RadCocoaHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF923F1745939E00ADC59E /* RadCocoaHTTPServer.m */; };
-		22FF92511745939E00ADC59E /* RadHTTPHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92421745939E00ADC59E /* RadHTTPHelpers.m */; };
-		22FF92521745939E00ADC59E /* RadHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92441745939E00ADC59E /* RadHTTPRequest.m */; };
-		22FF92531745939E00ADC59E /* RadHTTPRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92461745939E00ADC59E /* RadHTTPRequestHandler.m */; };
-		22FF92541745939E00ADC59E /* RadHTTPRequestRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92481745939E00ADC59E /* RadHTTPRequestRouter.m */; };
-		22FF92551745939E00ADC59E /* RadHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF924A1745939E00ADC59E /* RadHTTPResponse.m */; };
-		22FF92561745939E00ADC59E /* RadHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF924C1745939E00ADC59E /* RadHTTPServer.m */; };
-		22FF92571745939E00ADC59E /* RadLibEventHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF924E1745939E00ADC59E /* RadLibEventHTTPServer.m */; };
+		22FF92501745939E00ADC59E /* NuCocoaHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF923F1745939E00ADC59E /* NuCocoaHTTPServer.m */; };
+		22FF92511745939E00ADC59E /* NuHTTPHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92421745939E00ADC59E /* NuHTTPHelpers.m */; };
+		22FF92521745939E00ADC59E /* NuHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92441745939E00ADC59E /* NuHTTPRequest.m */; };
+		22FF92531745939E00ADC59E /* NuHTTPRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92461745939E00ADC59E /* NuHTTPRequestHandler.m */; };
+		22FF92541745939E00ADC59E /* NuHTTPRequestRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF92481745939E00ADC59E /* NuHTTPRequestRouter.m */; };
+		22FF92551745939E00ADC59E /* NuHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF924A1745939E00ADC59E /* NuHTTPResponse.m */; };
+		22FF92561745939E00ADC59E /* NuHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF924C1745939E00ADC59E /* NuHTTPServer.m */; };
+		22FF92571745939E00ADC59E /* NuLibEventHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF924E1745939E00ADC59E /* NuLibEventHTTPServer.m */; };
 		22FF925A174593B000ADC59E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF9259174593B000ADC59E /* main.m */; };
 		22FF925C1745945200ADC59E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FF925B1745945200ADC59E /* CoreServices.framework */; };
 		22FF925E1745946300ADC59E /* libevent.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FF925D1745946300ADC59E /* libevent.dylib */; };
@@ -36,29 +36,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2203867D18D6BB330091A43B /* RadLibEVHTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadLibEVHTPServer.h; sourceTree = "<group>"; };
-		2203867E18D6BB330091A43B /* RadLibEVHTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadLibEVHTPServer.m; sourceTree = "<group>"; };
-		22E9FD331745F55500FE9B01 /* RadHTTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPService.h; sourceTree = "<group>"; };
-		22E9FD341745F55500FE9B01 /* RadHTTPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPService.m; sourceTree = "<group>"; };
-		22FF922A174592DB00ADC59E /* RadHTTP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RadHTTP; sourceTree = BUILT_PRODUCTS_DIR; };
+		2203867D18D6BB330091A43B /* NuLibEVHTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuLibEVHTPServer.h; sourceTree = "<group>"; };
+		2203867E18D6BB330091A43B /* NuLibEVHTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuLibEVHTPServer.m; sourceTree = "<group>"; };
+		22E9FD331745F55500FE9B01 /* NuHTTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPService.h; sourceTree = "<group>"; };
+		22E9FD341745F55500FE9B01 /* NuHTTPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPService.m; sourceTree = "<group>"; };
+		22FF922A174592DB00ADC59E /* NuHTTP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NuHTTP; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FF922D174592DB00ADC59E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		22FF923E1745939E00ADC59E /* RadCocoaHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadCocoaHTTPServer.h; sourceTree = "<group>"; };
-		22FF923F1745939E00ADC59E /* RadCocoaHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadCocoaHTTPServer.m; sourceTree = "<group>"; };
-		22FF92401745939E00ADC59E /* RadHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTP.h; sourceTree = "<group>"; };
-		22FF92411745939E00ADC59E /* RadHTTPHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPHelpers.h; sourceTree = "<group>"; };
-		22FF92421745939E00ADC59E /* RadHTTPHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPHelpers.m; sourceTree = "<group>"; };
-		22FF92431745939E00ADC59E /* RadHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPRequest.h; sourceTree = "<group>"; };
-		22FF92441745939E00ADC59E /* RadHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPRequest.m; sourceTree = "<group>"; };
-		22FF92451745939E00ADC59E /* RadHTTPRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPRequestHandler.h; sourceTree = "<group>"; };
-		22FF92461745939E00ADC59E /* RadHTTPRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPRequestHandler.m; sourceTree = "<group>"; };
-		22FF92471745939E00ADC59E /* RadHTTPRequestRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPRequestRouter.h; sourceTree = "<group>"; };
-		22FF92481745939E00ADC59E /* RadHTTPRequestRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPRequestRouter.m; sourceTree = "<group>"; };
-		22FF92491745939E00ADC59E /* RadHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPResponse.h; sourceTree = "<group>"; };
-		22FF924A1745939E00ADC59E /* RadHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPResponse.m; sourceTree = "<group>"; };
-		22FF924B1745939E00ADC59E /* RadHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadHTTPServer.h; sourceTree = "<group>"; };
-		22FF924C1745939E00ADC59E /* RadHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadHTTPServer.m; sourceTree = "<group>"; };
-		22FF924D1745939E00ADC59E /* RadLibEventHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadLibEventHTTPServer.h; sourceTree = "<group>"; };
-		22FF924E1745939E00ADC59E /* RadLibEventHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadLibEventHTTPServer.m; sourceTree = "<group>"; };
+		22FF923E1745939E00ADC59E /* NuCocoaHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuCocoaHTTPServer.h; sourceTree = "<group>"; };
+		22FF923F1745939E00ADC59E /* NuCocoaHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuCocoaHTTPServer.m; sourceTree = "<group>"; };
+		22FF92401745939E00ADC59E /* NuHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTP.h; sourceTree = "<group>"; };
+		22FF92411745939E00ADC59E /* NuHTTPHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPHelpers.h; sourceTree = "<group>"; };
+		22FF92421745939E00ADC59E /* NuHTTPHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPHelpers.m; sourceTree = "<group>"; };
+		22FF92431745939E00ADC59E /* NuHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPRequest.h; sourceTree = "<group>"; };
+		22FF92441745939E00ADC59E /* NuHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPRequest.m; sourceTree = "<group>"; };
+		22FF92451745939E00ADC59E /* NuHTTPRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPRequestHandler.h; sourceTree = "<group>"; };
+		22FF92461745939E00ADC59E /* NuHTTPRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPRequestHandler.m; sourceTree = "<group>"; };
+		22FF92471745939E00ADC59E /* NuHTTPRequestRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPRequestRouter.h; sourceTree = "<group>"; };
+		22FF92481745939E00ADC59E /* NuHTTPRequestRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPRequestRouter.m; sourceTree = "<group>"; };
+		22FF92491745939E00ADC59E /* NuHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPResponse.h; sourceTree = "<group>"; };
+		22FF924A1745939E00ADC59E /* NuHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPResponse.m; sourceTree = "<group>"; };
+		22FF924B1745939E00ADC59E /* NuHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuHTTPServer.h; sourceTree = "<group>"; };
+		22FF924C1745939E00ADC59E /* NuHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuHTTPServer.m; sourceTree = "<group>"; };
+		22FF924D1745939E00ADC59E /* NuLibEventHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NuLibEventHTTPServer.h; sourceTree = "<group>"; };
+		22FF924E1745939E00ADC59E /* NuLibEventHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NuLibEventHTTPServer.m; sourceTree = "<group>"; };
 		22FF9259174593B000ADC59E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22FF925B1745945200ADC59E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = ../../../../System/Library/Frameworks/CoreServices.framework; sourceTree = "<group>"; };
 		22FF925D1745946300ADC59E /* libevent.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libevent.dylib; path = ../../../../usr/local/lib/libevent.dylib; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 			children = (
 				22FF925D1745946300ADC59E /* libevent.dylib */,
 				22FF925B1745945200ADC59E /* CoreServices.framework */,
-				22FF922F174592DB00ADC59E /* RadHTTP */,
+				22FF922F174592DB00ADC59E /* NuHTTP */,
 				22FF922C174592DB00ADC59E /* Frameworks */,
 				22FF922B174592DB00ADC59E /* Products */,
 			);
@@ -92,7 +92,7 @@
 		22FF922B174592DB00ADC59E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22FF922A174592DB00ADC59E /* RadHTTP */,
+				22FF922A174592DB00ADC59E /* NuHTTP */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,39 +105,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		22FF922F174592DB00ADC59E /* RadHTTP */ = {
+		22FF922F174592DB00ADC59E /* NuHTTP */ = {
 			isa = PBXGroup;
 			children = (
 				22FF9258174593B000ADC59E /* main */,
 				22FF923B1745939E00ADC59E /* objc */,
 			);
+			name = NuHTTP;
 			path = RadHTTP;
 			sourceTree = "<group>";
 		};
 		22FF923B1745939E00ADC59E /* objc */ = {
 			isa = PBXGroup;
 			children = (
-				22FF92401745939E00ADC59E /* RadHTTP.h */,
-				22FF92411745939E00ADC59E /* RadHTTPHelpers.h */,
-				22FF92421745939E00ADC59E /* RadHTTPHelpers.m */,
-				22FF92431745939E00ADC59E /* RadHTTPRequest.h */,
-				22FF92441745939E00ADC59E /* RadHTTPRequest.m */,
-				22FF92451745939E00ADC59E /* RadHTTPRequestHandler.h */,
-				22FF92461745939E00ADC59E /* RadHTTPRequestHandler.m */,
-				22FF92471745939E00ADC59E /* RadHTTPRequestRouter.h */,
-				22FF92481745939E00ADC59E /* RadHTTPRequestRouter.m */,
-				22FF92491745939E00ADC59E /* RadHTTPResponse.h */,
-				22FF924A1745939E00ADC59E /* RadHTTPResponse.m */,
-				22E9FD331745F55500FE9B01 /* RadHTTPService.h */,
-				22E9FD341745F55500FE9B01 /* RadHTTPService.m */,
-				22FF924B1745939E00ADC59E /* RadHTTPServer.h */,
-				22FF924C1745939E00ADC59E /* RadHTTPServer.m */,
-				22FF923E1745939E00ADC59E /* RadCocoaHTTPServer.h */,
-				22FF923F1745939E00ADC59E /* RadCocoaHTTPServer.m */,
-				22FF924D1745939E00ADC59E /* RadLibEventHTTPServer.h */,
-				22FF924E1745939E00ADC59E /* RadLibEventHTTPServer.m */,
-				2203867D18D6BB330091A43B /* RadLibEVHTPServer.h */,
-				2203867E18D6BB330091A43B /* RadLibEVHTPServer.m */,
+				22FF92401745939E00ADC59E /* NuHTTP.h */,
+				22FF92411745939E00ADC59E /* NuHTTPHelpers.h */,
+				22FF92421745939E00ADC59E /* NuHTTPHelpers.m */,
+				22FF92431745939E00ADC59E /* NuHTTPRequest.h */,
+				22FF92441745939E00ADC59E /* NuHTTPRequest.m */,
+				22FF92451745939E00ADC59E /* NuHTTPRequestHandler.h */,
+				22FF92461745939E00ADC59E /* NuHTTPRequestHandler.m */,
+				22FF92471745939E00ADC59E /* NuHTTPRequestRouter.h */,
+				22FF92481745939E00ADC59E /* NuHTTPRequestRouter.m */,
+				22FF92491745939E00ADC59E /* NuHTTPResponse.h */,
+				22FF924A1745939E00ADC59E /* NuHTTPResponse.m */,
+				22E9FD331745F55500FE9B01 /* NuHTTPService.h */,
+				22E9FD341745F55500FE9B01 /* NuHTTPService.m */,
+				22FF924B1745939E00ADC59E /* NuHTTPServer.h */,
+				22FF924C1745939E00ADC59E /* NuHTTPServer.m */,
+				22FF923E1745939E00ADC59E /* NuCocoaHTTPServer.h */,
+				22FF923F1745939E00ADC59E /* NuCocoaHTTPServer.m */,
+				22FF924D1745939E00ADC59E /* NuLibEventHTTPServer.h */,
+				22FF924E1745939E00ADC59E /* NuLibEventHTTPServer.m */,
+				2203867D18D6BB330091A43B /* NuLibEVHTPServer.h */,
+				2203867E18D6BB330091A43B /* NuLibEVHTPServer.m */,
 			);
 			path = objc;
 			sourceTree = SOURCE_ROOT;
@@ -153,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22FF9229174592DB00ADC59E /* RadHTTP */ = {
+		22FF9229174592DB00ADC59E /* NuHTTP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22FF9238174592DB00ADC59E /* Build configuration list for PBXNativeTarget "RadHTTP" */;
+			buildConfigurationList = 22FF9238174592DB00ADC59E /* Build configuration list for PBXNativeTarget "NuHTTP" */;
 			buildPhases = (
 				22FF9226174592DB00ADC59E /* Sources */,
 				22FF9227174592DB00ADC59E /* Frameworks */,
@@ -165,9 +166,9 @@
 			);
 			dependencies = (
 			);
-			name = RadHTTP;
+			name = NuHTTP;
 			productName = RadHTTP;
-			productReference = 22FF922A174592DB00ADC59E /* RadHTTP */;
+			productReference = 22FF922A174592DB00ADC59E /* NuHTTP */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +180,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Radtastical Inc";
 			};
-			buildConfigurationList = 22FF9225174592DB00ADC59E /* Build configuration list for PBXProject "RadHTTP" */;
+			buildConfigurationList = 22FF9225174592DB00ADC59E /* Build configuration list for PBXProject "NuHTTP" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -191,7 +192,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22FF9229174592DB00ADC59E /* RadHTTP */,
+				22FF9229174592DB00ADC59E /* NuHTTP */,
 			);
 		};
 /* End PBXProject section */
@@ -201,17 +202,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22FF92501745939E00ADC59E /* RadCocoaHTTPServer.m in Sources */,
-				22FF92511745939E00ADC59E /* RadHTTPHelpers.m in Sources */,
-				2203867F18D6BB330091A43B /* RadLibEVHTPServer.m in Sources */,
-				22FF92521745939E00ADC59E /* RadHTTPRequest.m in Sources */,
-				22FF92531745939E00ADC59E /* RadHTTPRequestHandler.m in Sources */,
-				22FF92541745939E00ADC59E /* RadHTTPRequestRouter.m in Sources */,
-				22FF92551745939E00ADC59E /* RadHTTPResponse.m in Sources */,
-				22FF92561745939E00ADC59E /* RadHTTPServer.m in Sources */,
-				22FF92571745939E00ADC59E /* RadLibEventHTTPServer.m in Sources */,
+				22FF92501745939E00ADC59E /* NuCocoaHTTPServer.m in Sources */,
+				22FF92511745939E00ADC59E /* NuHTTPHelpers.m in Sources */,
+				2203867F18D6BB330091A43B /* NuLibEVHTPServer.m in Sources */,
+				22FF92521745939E00ADC59E /* NuHTTPRequest.m in Sources */,
+				22FF92531745939E00ADC59E /* NuHTTPRequestHandler.m in Sources */,
+				22FF92541745939E00ADC59E /* NuHTTPRequestRouter.m in Sources */,
+				22FF92551745939E00ADC59E /* NuHTTPResponse.m in Sources */,
+				22FF92561745939E00ADC59E /* NuHTTPServer.m in Sources */,
+				22FF92571745939E00ADC59E /* NuLibEventHTTPServer.m in Sources */,
 				22FF925A174593B000ADC59E /* main.m in Sources */,
-				22E9FD351745F55500FE9B01 /* RadHTTPService.m in Sources */,
+				22E9FD351745F55500FE9B01 /* NuHTTPService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +326,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22FF9225174592DB00ADC59E /* Build configuration list for PBXProject "RadHTTP" */ = {
+		22FF9225174592DB00ADC59E /* Build configuration list for PBXProject "NuHTTP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22FF9236174592DB00ADC59E /* Debug */,
@@ -334,7 +335,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22FF9238174592DB00ADC59E /* Build configuration list for PBXNativeTarget "RadHTTP" */ = {
+		22FF9238174592DB00ADC59E /* Build configuration list for PBXNativeTarget "NuHTTP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22FF9239174592DB00ADC59E /* Debug */,

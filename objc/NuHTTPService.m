@@ -1,28 +1,28 @@
 //
-//  RadHTTPService.m
-//  RadHTTP
+//  NuHTTPService.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 5/16/13.
 //  Copyright (c) 2013 Radtastical Inc. All rights reserved.
 //
 
 #include <dispatch/dispatch.h>
-#import "RadHTTPService.h"
-#import "RadHTTPRequestRouter.h"
-#import "RadHTTPRequestHandler.h"
+#import "NuHTTPService.h"
+#import "NuHTTPRequestRouter.h"
+#import "NuHTTPRequestHandler.h"
 
-@interface RadHTTPService ()
-@property (nonatomic, strong) RadHTTPRequestRouter *router;
+@interface NuHTTPService ()
+@property (nonatomic, strong) NuHTTPRequestRouter *router;
 @property (nonatomic, strong) NSMutableDictionary *mimetypes;
 @end
 
-@implementation RadHTTPService
+@implementation NuHTTPService
 @synthesize router, mimetypes;
 
-+ (RadHTTPService *) sharedService
++ (NuHTTPService *) sharedService
 {
     static dispatch_once_t once;
-    static RadHTTPService *sharedInstance;
+    static NuHTTPService *sharedInstance;
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
     });
@@ -31,7 +31,7 @@
 
 - (id) init {
     if (self = [super init]) {
-        self.router = [[RadHTTPRequestRouter alloc] init];
+        self.router = [[NuHTTPRequestRouter alloc] init];
         self.mimetypes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                           @"text/plain", @"txt",
                           @"text/css", @"css",
@@ -139,17 +139,17 @@
 
 - (void) addHandlerWithHTTPMethod:(NSString *) method path:(NSString *) path block:(id) block
 {
-    [self.router insertHandler:[RadHTTPRequestHandler handlerWithHTTPMethod:method path:path block:block]
+    [self.router insertHandler:[NuHTTPRequestHandler handlerWithHTTPMethod:method path:path block:block]
                   level:0];
 }
 
 - (void) addHandlerWithPath:(NSString *) path directory:(NSString *) directory
 {
-    [self.router insertHandler:[RadHTTPRequestHandler handlerWithPath:path directory:directory]
+    [self.router insertHandler:[NuHTTPRequestHandler handlerWithPath:path directory:directory]
                   level:0];
 }
 
-- (RadHTTPResponse *) responseForHTTPRequest:(RadHTTPRequest *) request
+- (NuHTTPResponse *) responseForHTTPRequest:(NuHTTPRequest *) request
 {
     return [self.router responseForHTTPRequest:request];
 }

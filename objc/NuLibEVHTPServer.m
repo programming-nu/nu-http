@@ -1,25 +1,25 @@
 //
-//  RadLibEVHTPServer.m
-//  RadHTTP
+//  NuLibEVHTPServer.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 3/16/14.
 //  Copyright (c) 2014 Radtastical Inc. All rights reserved.
 //
 
-#import "RadLibEVHTPServer.h"
-#import "RadHTTPRequest.h"
-#import "RadHTTPResponse.h"
-#import "RadHTTPService.h"
+#import "NuLibEVHTPServer.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPResponse.h"
+#import "NuHTTPService.h"
 
 #import <evhtp.h>
 
-@interface RadLibEVHTPServer () {
+@interface NuLibEVHTPServer () {
     evbase_t *evbase;
     evhtp_t  *htp;
 }
 @property (nonatomic, strong) NSMutableArray *operationQueue;
 
-- (void)processRequest:(RadHTTPRequest *)request;
+- (void)processRequest:(NuHTTPRequest *)request;
 
 @end
 
@@ -82,7 +82,7 @@ static NSString *scheme_for_uri(const evhtp_uri_t *uri)
     }
 }
 
-static NSDictionary *rad_request_headers_helper(evhtp_request_t *req)
+static NSDictionary *nu_request_headers_helper(evhtp_request_t *req)
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     evhtp_kv_t *header;
@@ -93,7 +93,7 @@ static NSDictionary *rad_request_headers_helper(evhtp_request_t *req)
     return dict;
 }
 
-static NSData *rad_request_body_helper(evhtp_request_t *req)
+static NSData *nu_request_body_helper(evhtp_request_t *req)
 {
 	unsigned long length = evbuffer_get_length(req->buffer_in);
     if (!length)
@@ -104,10 +104,10 @@ static NSData *rad_request_body_helper(evhtp_request_t *req)
     }
 }
 
-static void rad_request_handler(evhtp_request_t *req, void *server_context)
+static void nu_request_handler(evhtp_request_t *req, void *server_context)
 {
-    RadLibEVHTPServer *server = (__bridge RadLibEVHTPServer *) server_context;
-    RadHTTPRequest *request = [[RadHTTPRequest alloc] init];
+    NuLibEVHTPServer *server = (__bridge NuLibEVHTPServer *) server_context;
+    NuHTTPRequest *request = [[NuHTTPRequest alloc] init];
     
     const evhtp_uri_t *uri = req->uri;
     
@@ -129,8 +129,8 @@ static void rad_request_handler(evhtp_request_t *req, void *server_context)
     NSString *urlString = [NSString stringWithFormat:@"%@://%@%@", scheme, host, fullpath];
     request.URL = [[NSURL alloc] initWithString:urlString];
     request.method = method_for_request(req);
-    request.headers = rad_request_headers_helper(req);
-    request.body = rad_request_body_helper(req);
+    request.headers = nu_request_headers_helper(req);
+    request.body = nu_request_body_helper(req);
     request.context = req;
     request.server = server;
     request.scheme = scheme;
@@ -138,16 +138,16 @@ static void rad_request_handler(evhtp_request_t *req, void *server_context)
 }
 
 
-@implementation RadLibEVHTPServer
+@implementation NuLibEVHTPServer
 @synthesize operationQueue;
 
-- (id)initWithService:(RadHTTPService *) service
+- (id)initWithService:(NuHTTPService *) service
 {
     if (self = [super initWithService:service]) {
         self->evbase = event_base_new();
         self->htp    = evhtp_new(evbase, NULL);
         
-        evhtp_set_gencb(self->htp, rad_request_handler, (__bridge void *)(self));
+        evhtp_set_gencb(self->htp, nu_request_handler, (__bridge void *)(self));
         operationQueue = [NSMutableArray array];
     }
     return self;
@@ -207,7 +207,7 @@ static void sig_int(int sig)
     event_base_free(self->evbase);
 }
 
-static NSDictionary *rad_response_headers_helper(evhtp_request_t *req)
+static NSDictionary *nu_response_headers_helper(evhtp_request_t *req)
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     evhtp_kv_t *header;
@@ -218,7 +218,7 @@ static NSDictionary *rad_response_headers_helper(evhtp_request_t *req)
     return dict;
 }
 
-static void rad_response_helper(evhtp_request_t *req, RadHTTPResponse *response)
+static void nu_response_helper(evhtp_request_t *req, NuHTTPResponse *response)
 {    
     
     for (id key in [response.headers allKeys]) {
@@ -249,7 +249,7 @@ static void rad_response_helper(evhtp_request_t *req, RadHTTPResponse *response)
     evhtp_send_reply(req, response.status);
 }
 
-- (void) processRequest:(RadHTTPRequest *)request
+- (void) processRequest:(NuHTTPRequest *)request
 {
     if (self.verbose) {
         NSLog(@"REQUEST %@ %@ %@\n%@",
@@ -260,9 +260,9 @@ static void rad_response_helper(evhtp_request_t *req, RadHTTPResponse *response)
               );
     }
     @try {
-        RadHTTPResponse *response = [self.service responseForHTTPRequest:request];
+        NuHTTPResponse *response = [self.service responseForHTTPRequest:request];
         if (!response) {
-            response = [[RadHTTPResponse alloc] init];
+            response = [[NuHTTPResponse alloc] init];
             response.status = 404;
             response.body = [@"Resource not found" dataUsingEncoding:NSUTF8StringEncoding];
         }
@@ -271,7 +271,7 @@ static void rad_response_helper(evhtp_request_t *req, RadHTTPResponse *response)
         if (self.verbose) {
             NSLog(@"RESPONSE %d %@", response.status, [response.headers description]);
         }
-        rad_response_helper(req, response);
+        nu_response_helper(req, response);
         if (response.exit) {
             event_base_loopexit(self->evbase, NULL);
         }

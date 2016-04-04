@@ -1,20 +1,20 @@
 //
-//  RadHTTPHelpers.m
-//  RadHTTP
+//  NuHTTPHelpers.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
-#import "RadHTTPHelpers.h"
+#import "NuHTTPHelpers.h"
 #import <wctype.h>
 #import <time.h>
 #import <xlocale.h>
 
-@interface NSString (_RadHTTPHelpers)
+@interface NSString (_NuHTTPHelpers)
 - (NSString *) stringValue;
 @end
 
-@implementation NSString (_RadHTTPHelpers)
+@implementation NSString (_NuHTTPHelpers)
 - (NSString *) stringValue {return self;}
 @end
 
@@ -43,7 +43,7 @@ static unichar char_to_int(unichar c)
 
 static char int_to_char[] = "0123456789ABCDEF";
 
-@implementation NSString (RadHTTPHelpers)
+@implementation NSString (NuHTTPHelpers)
 
 - (NSString *) urlEncodedString
 {
@@ -115,7 +115,7 @@ static char int_to_char[] = "0123456789ABCDEF";
 
 @end
 
-@implementation NSDictionary (RadHTTPHelpers)
+@implementation NSDictionary (NuHTTPHelpers)
 
 - (NSString *) urlQueryString
 {
@@ -138,7 +138,7 @@ static char int_to_char[] = "0123456789ABCDEF";
 
 @end
 
-@implementation NSData (RadHTTPHelpers)
+@implementation NSData (NuHTTPHelpers)
 
 - (NSDictionary *) urlQueryDictionary {
     return [[[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding] urlQueryDictionary];
@@ -297,7 +297,7 @@ static NSMutableDictionary *parseHeaders(const char *headers)
 
 @end
 
-@implementation NSData (RadBinaryEncoding)
+@implementation NSData (NuBinaryEncoding)
 
 static const char *const hexEncodingTable = "0123456789abcdef";
 
@@ -347,7 +347,7 @@ static const char *const hexEncodingTable = "0123456789abcdef";
 }
 @end
 
-@implementation NSDate (RadHTTPHelpers)
+@implementation NSDate (NuHTTPHelpers)
 // Get an RFC822-compliant representation of a date.
 - (NSString *) rfc822String
 {

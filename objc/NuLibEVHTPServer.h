@@ -1,13 +1,13 @@
 //
-//  RadLibEVHTPServer.h
-//  RadHTTP
+//  NuLibEVHTPServer.h
+//  NuHTTP
 //
 //  Created by Tim Burks on 3/16/14.
 //  Copyright (c) 2014 Radtastical Inc. All rights reserved.
 //
 
-#import "RadHTTPServer.h"
+#import "NuHTTPServer.h"
 
-@interface RadLibEVHTPServer : RadHTTPServer
+@interface NuLibEVHTPServer : NuHTTPServer
 
 @end

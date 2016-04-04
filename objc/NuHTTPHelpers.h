@@ -1,28 +1,28 @@
 //
-//  RadHTTPHelpers.h
-//  RadHTTP
+//  NuHTTPHelpers.h
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 
-@interface NSString (RadHTTPHelpers)
+@interface NSString (NuHTTPHelpers)
 - (NSString *) urlEncodedString;
 - (NSString *) urlDecodedString;
 - (NSDictionary *) urlQueryDictionary;
 @end
 
-@interface NSData (RadHTTPHelpers)
+@interface NSData (NuHTTPHelpers)
 - (NSDictionary *) urlQueryDictionary;
 @end
 
-@interface NSDictionary (RadHTTPHelpers)
+@interface NSDictionary (NuHTTPHelpers)
 - (NSString *) urlQueryString;
 - (NSData *) urlQueryData;
 @end
 
-@interface NSData (RadBinaryEncoding)
+@interface NSData (NuBinaryEncoding)
 - (NSString *) hexEncodedString;
 + (id) dataWithHexEncodedString:(NSString *) string;
 @end

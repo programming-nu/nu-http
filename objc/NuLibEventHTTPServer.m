@@ -1,15 +1,15 @@
 //
-//  RadLibEventHTTPServer.m
-//  RadHTTP
+//  NuLibEventHTTPServer.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 5/16/13.
 //  Copyright (c) 2013 Radtastical Inc. All rights reserved.
 //
 
-#import "RadLibEventHTTPServer.h"
-#import "RadHTTPRequest.h"
-#import "RadHTTPResponse.h"
-#import "RadHTTPService.h"
+#import "NuLibEventHTTPServer.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPResponse.h"
+#import "NuHTTPService.h"
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -33,14 +33,14 @@
 
 #include <signal.h>                               // SIGPIPE
 
-@interface RadLibEventHTTPServer ()
+@interface NuLibEventHTTPServer ()
 {
     struct event_base *event_base;
     struct evhttp *httpd;
 }
 @property (nonatomic, strong) NSMutableArray *operationQueue;
 
-- (void)processRequest:(RadHTTPRequest *)request;
+- (void)processRequest:(NuHTTPRequest *)request;
 
 @end
 
@@ -63,7 +63,7 @@ static NSString *method_for_request(struct evhttp_request *req)
     }
 }
 
-static NSDictionary *rad_request_headers_helper(struct evhttp_request *req)
+static NSDictionary *nu_request_headers_helper(struct evhttp_request *req)
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     struct evkeyval *header;
@@ -74,7 +74,7 @@ static NSDictionary *rad_request_headers_helper(struct evhttp_request *req)
     return dict;
 }
 
-static NSData *rad_request_body_helper(struct evhttp_request *req)
+static NSData *nu_request_body_helper(struct evhttp_request *req)
 {
 	unsigned long length = evbuffer_get_length(req->input_buffer);
     if (!length)
@@ -85,10 +85,10 @@ static NSData *rad_request_body_helper(struct evhttp_request *req)
     }
 }
 
-static void rad_request_handler(struct evhttp_request *req, void *server_context)
+static void nu_request_handler(struct evhttp_request *req, void *server_context)
 {
-    RadLibEventHTTPServer *server = (__bridge RadLibEventHTTPServer *) server_context;
-    RadHTTPRequest *request = [[RadHTTPRequest alloc] init];
+    NuLibEventHTTPServer *server = (__bridge NuLibEventHTTPServer *) server_context;
+    NuHTTPRequest *request = [[NuHTTPRequest alloc] init];
 
     const struct evhttp_uri *uri = evhttp_request_get_evhttp_uri (req);
     const char *schemeString = evhttp_uri_get_scheme(uri);
@@ -114,23 +114,23 @@ static void rad_request_handler(struct evhttp_request *req, void *server_context
     NSString *urlString = [NSString stringWithFormat:@"%@://%@%@", scheme, host, fullpath];
     request.URL = [[NSURL alloc] initWithString:urlString];
     request.method = method_for_request(req);
-    request.headers = rad_request_headers_helper(req);
-    request.body = rad_request_body_helper(req);
+    request.headers = nu_request_headers_helper(req);
+    request.body = nu_request_body_helper(req);
     request.context = req;
     request.server = server;
     return [server processRequest:request];
 }
 
-@implementation RadLibEventHTTPServer
+@implementation NuLibEventHTTPServer
 @synthesize operationQueue;
 
-- (id)initWithService:(RadHTTPService *) service
+- (id)initWithService:(NuHTTPService *) service
 {
     if (self = [super initWithService:service]) {
         event_base = event_init();
         evdns_init();
         httpd = evhttp_new(event_base);
-        evhttp_set_gencb(httpd, rad_request_handler, (__bridge void *)(self));
+        evhttp_set_gencb(httpd, nu_request_handler, (__bridge void *)(self));
         operationQueue = [NSMutableArray array];
     }
     return self;
@@ -182,7 +182,7 @@ static void sig_int(int sig)
     [self start];
 }
 
-static NSDictionary *rad_response_headers_helper(struct evhttp_request *req)
+static NSDictionary *nu_response_headers_helper(struct evhttp_request *req)
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     struct evkeyval *header;
@@ -196,7 +196,7 @@ static NSDictionary *rad_response_headers_helper(struct evhttp_request *req)
     return dict;
 }
 
-static void rad_response_helper(struct evhttp_request *req, RadHTTPResponse *response)
+static void nu_response_helper(struct evhttp_request *req, NuHTTPResponse *response)
 {    
     evhttp_clear_headers(req->output_headers);
     for (id key in [response.headers allKeys]) {
@@ -226,7 +226,7 @@ static void rad_response_helper(struct evhttp_request *req, RadHTTPResponse *res
     evbuffer_free(buf);
 }
 
-- (void)processRequest:(RadHTTPRequest *)request
+- (void)processRequest:(NuHTTPRequest *)request
 {
     if (self.verbose) {
         NSLog(@"%@ %@ %@\n%@",
@@ -237,9 +237,9 @@ static void rad_response_helper(struct evhttp_request *req, RadHTTPResponse *res
               );
     }
     @try {
-        RadHTTPResponse *response = [self.service responseForHTTPRequest:request];
+        NuHTTPResponse *response = [self.service responseForHTTPRequest:request];
         if (!response) {
-            response = [[RadHTTPResponse alloc] init];
+            response = [[NuHTTPResponse alloc] init];
             response.status = 404;
             response.body = [@"Resource not found" dataUsingEncoding:NSUTF8StringEncoding];
         }
@@ -248,7 +248,7 @@ static void rad_response_helper(struct evhttp_request *req, RadHTTPResponse *res
         if (self.verbose) {
             NSLog(@"RESPONSE %d %@", response.status, [response.headers description]);
         }
-        rad_response_helper(req, response);
+        nu_response_helper(req, response);
         if (response.exit) {
 		event_base_loopexit(event_base, NULL);
         }
@@ -262,7 +262,7 @@ static void rad_response_helper(struct evhttp_request *req, RadHTTPResponse *res
 // to schedule longer-running actions so that they can respond more quickly to requests.
 void cb_func(evutil_socket_t fd, short what, void *arg)
 {
-   RadLibEventHTTPServer *server = (__bridge RadLibEventHTTPServer *) arg;
+   NuLibEventHTTPServer *server = (__bridge NuLibEventHTTPServer *) arg;
    NSOperation *operation = [server.operationQueue objectAtIndex:0];
    [operation main];
    [server.operationQueue removeObjectAtIndex:0];

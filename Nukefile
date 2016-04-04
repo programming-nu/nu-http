@@ -1,12 +1,12 @@
 ;;
-;; Nukefile for RadHTTP
+;; Nukefile for NuHTTP
 ;;
 ;; Commands:
-;;	nuke 		- builds RadHTTP as a framework
+;;	nuke 		- builds NuHTTP as a framework
 ;;	nuke test	- runs the unit tests in the NuTests directory
-;;	nuke install	- installs RadHTTP in /Library/Frameworks
+;;	nuke install	- installs NuHTTP in /Library/Frameworks
 ;;	nuke clean	- removes build artifacts
-;;	nuke clobber	- removes build artifacts and RadHTTP.framework
+;;	nuke clobber	- removes build artifacts and NuHTTP.framework
 ;;
 ;; The "nuke" build tool is installed with Nu (http://programming.nu)
 ;;
@@ -36,8 +36,8 @@
 
 
 ;; framework description
-(set @framework "RadHTTP")
-(set @framework_identifier   "com.radtastical.radhttp")
+(set @framework "NuHTTP")
+(set @framework_identifier   "nu.programming.http")
 (set @framework_creator_code "????")
 
 (compilation-tasks)

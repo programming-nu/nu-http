@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 
-// this expects RadHTTP to be installed as a separate framework
+// this expects NuHTTP to be installed as a separate framework
 // typically in /Library/Frameworks
 
-#import "RadLibEVHTPServer.h"
-#import "RadLibEventHTTPServer.h"
-#import "RadCocoaHTTPServer.h"
-#import "RadHTTPService.h"
-#import "RadHTTPResponse.h"
-#import "RadHTTPRequest.h"
-#import "RadHTTPHelpers.h"
+#import "NuLibEVHTPServer.h"
+#import "NuLibEventHTTPServer.h"
+#import "NuCocoaHTTPServer.h"
+#import "NuHTTPService.h"
+#import "NuHTTPResponse.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPHelpers.h"
 
 #define CACHEDIRECTORY @"cache"
 
@@ -38,11 +38,11 @@ int main (int argc, const char *argv[])
         static NSString *cacheDirectory = CACHEDIRECTORY;
         create_cache_directory(cacheDirectory);
         
-        RadHTTPService *service = [[RadHTTPService alloc] init];
+        NuHTTPService *service = [[NuHTTPService alloc] init];
         
         
         [service addHandlerWithHTTPMethod:@"PUT" path:@"/put" block:
-         ^(RadHTTPRequest *request) {
+         ^(NuHTTPRequest *request) {
             
             NSLog(@"PUT %d bytes", (int) [request.body length]);
              //NSString *string = [[NSString alloc] initWithData:request.body encoding:NSUTF8StringEncoding];
@@ -50,7 +50,7 @@ int main (int argc, const char *argv[])
              //NSLog(@"------");
              
              
-            RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+            NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
             response.body = nil;
             return response;
             
@@ -59,8 +59,8 @@ int main (int argc, const char *argv[])
     
         
        [service addHandlerWithHTTPMethod:@"HEAD" path:@"/*path:" block:
-         ^(RadHTTPRequest *request) {
-             RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+         ^(NuHTTPRequest *request) {
+             NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
              response.body = nil;
              NSLog(@"hit HEAD");
              return response;
@@ -68,9 +68,9 @@ int main (int argc, const char *argv[])
     
         
         [service addHandlerWithHTTPMethod:@"GET" path:@"/" block:
-         ^(RadHTTPRequest *request) {
-             RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
-             response.body = [@"RadHTTP" dataUsingEncoding:NSUTF8StringEncoding];
+         ^(NuHTTPRequest *request) {
+             NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
+             response.body = [@"NuHTTP" dataUsingEncoding:NSUTF8StringEncoding];
              NSLog(@"hit");
              //usleep(100000);
              //sleep(3);
@@ -78,7 +78,7 @@ int main (int argc, const char *argv[])
          }];
         
         [service addHandlerWithHTTPMethod:@"POST" path:@"/item" block:
-         ^(RadHTTPRequest *request) {
+         ^(NuHTTPRequest *request) {
              NSString *contentType = [request.headers objectForKey:@"Content-Type"];
              NSString *creatorName = [request.headers objectForKey:@"Creator-Name"];
              NSDictionary *item = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -98,13 +98,13 @@ int main (int argc, const char *argv[])
              NSData *hashData = [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];
              NSString *hashString = [hashData hexEncodedString];
              [data writeToFile:[cacheDirectory stringByAppendingPathComponent:hashString] atomically:NO];
-             RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+             NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
              response.body = [hashString dataUsingEncoding:NSUTF8StringEncoding];
              return response;
          }];
         
         [service addHandlerWithHTTPMethod:@"GET" path:@"/item/identifier:" block:
-         ^(RadHTTPRequest *request) {
+         ^(NuHTTPRequest *request) {
              NSString *identifier = [request.bindings objectForKey:@"identifier"];
              NSData *data = [NSData dataWithContentsOfFile:
                              [cacheDirectory stringByAppendingPathComponent:identifier]];
@@ -114,14 +114,14 @@ int main (int argc, const char *argv[])
                                                   mutabilityOption:NSPropertyListImmutable
                                                             format:nil
                                                   errorDescription:nil];
-                 RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+                 NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
                  [response setValue:[info objectForKey:@"Content-Type"] forHTTPHeader:@"Content-Type"];
                  [response setValue:[info objectForKey:@"Creator-Name"] forHTTPHeader:@"Creator-Name"];
                  [response setValue:[info objectForKey:@"Creation-Time"] forHTTPHeader:@"Creation-Time"];
                  response.body = [info objectForKey:@"Body"];
                  return response;
              } else {
-                 return (RadHTTPResponse *) nil;
+                 return (NuHTTPResponse *) nil;
              }
          }];
         
@@ -130,18 +130,18 @@ int main (int argc, const char *argv[])
         
         // "Not found" handler. This should always be last.
         [service addHandlerWithHTTPMethod:@"GET" path:@"/*path:" block:
-         ^(RadHTTPRequest *request) {
+         ^(NuHTTPRequest *request) {
              NSString *path = [request.bindings objectForKey:@"*path"];
-             RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+             NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
              response.status = 404;
              response.body = [[NSString stringWithFormat:@"404 Not found: %@ %@", path, [request.URL description]]
                               dataUsingEncoding:NSUTF8StringEncoding];
              return response;
          }];
         
-        //RadCocoaHTTPServer *server = [[RadCocoaHTTPServer alloc] initWithService:service];
-        //RadLibEventHTTPServer *server = [[RadLibEventHTTPServer alloc] initWithService:service];
-        RadLibEVHTPServer *server = [[RadLibEVHTPServer alloc] initWithService:service];
+        //NuCocoaHTTPServer *server = [[NuCocoaHTTPServer alloc] initWithService:service];
+        //NuLibEventHTTPServer *server = [[NuLibEventHTTPServer alloc] initWithService:service];
+        NuLibEVHTPServer *server = [[NuLibEVHTPServer alloc] initWithService:service];
         [server setVerbose:YES];
         [server start];
         [[NSRunLoop mainRunLoop] run];

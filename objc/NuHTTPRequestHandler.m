@@ -1,21 +1,21 @@
-#import "RadHTTPRequestHandler.h"
-#import "RadHTTPRequest.h"
-#import "RadHTTPResponse.h"
-#import "RadHTTPService.h"
+#import "NuHTTPRequestHandler.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPResponse.h"
+#import "NuHTTPService.h"
 
-@interface RadHTTPRequestHandler ()
+@interface NuHTTPRequestHandler ()
 @property (nonatomic, strong) NSString *httpMethod;
 @property (nonatomic, strong) NSString *path;
 @property (nonatomic, strong) id block;
 @property (nonatomic, strong) NSArray *parts; // used to expand pattern for request routing
 @end
 
-@implementation RadHTTPRequestHandler
+@implementation NuHTTPRequestHandler
 @synthesize httpMethod, path, block, parts;
 
-+ (RadHTTPRequestHandler *) handlerWithHTTPMethod:(id)httpMethod path:(id)path block:(id)block
++ (NuHTTPRequestHandler *) handlerWithHTTPMethod:(id)httpMethod path:(id)path block:(id)block
 {
-    RadHTTPRequestHandler *handler = [[RadHTTPRequestHandler alloc] init];
+    NuHTTPRequestHandler *handler = [[NuHTTPRequestHandler alloc] init];
     handler.httpMethod = httpMethod;
     handler.path = path;
     handler.parts = [[NSString stringWithFormat:@"%@%@", httpMethod, path]
@@ -24,27 +24,27 @@
     return handler;
 }
 
-+ (RadHTTPRequestHandler *) handlerWithPath:(NSString *) path directory:(NSString *) directory
++ (NuHTTPRequestHandler *) handlerWithPath:(NSString *) path directory:(NSString *) directory
 {
-    RadHTTPRequestHandler *handler = [[RadHTTPRequestHandler alloc] init];
+    NuHTTPRequestHandler *handler = [[NuHTTPRequestHandler alloc] init];
     handler.httpMethod = @"GET";
     handler.path = path;
     handler.parts = [[NSString stringWithFormat:@"%@%@", @"GET", path]
                      componentsSeparatedByString:@"/"];
-    handler.block = ^(RadHTTPRequest *REQUEST) {
+    handler.block = ^(NuHTTPRequest *REQUEST) {
         NSString *path = [REQUEST.bindings objectForKey:@"*path"];
         NSData *data = [NSData dataWithContentsOfFile:
                         [directory stringByAppendingPathComponent:path]];
         if (data) {
-            RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+            NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
             response.body = data;
-            [response setValue:[[RadHTTPService sharedService] mimeTypeForFilename:path]
+            [response setValue:[[NuHTTPService sharedService] mimeTypeForFilename:path]
                  forHTTPHeader:@"Content-Type"];
             [response setValue:@"max-age=3600"
                  forHTTPHeader:@"Cache-Control"];
             return response;
         } else {
-            return (RadHTTPResponse *) nil;
+            return (NuHTTPResponse *) nil;
         }
     };
     return handler;
@@ -59,7 +59,7 @@ static Class NuCell;
 }
 
 // Handle a request. Used internally.
-- (RadHTTPResponse *) responseForHTTPRequest:(RadHTTPRequest *) request;
+- (NuHTTPResponse *) responseForHTTPRequest:(NuHTTPRequest *) request;
 {
     // NSLog(@"handling request %@", [[request URL] description]);
     @autoreleasepool {

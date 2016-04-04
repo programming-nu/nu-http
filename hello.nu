@@ -1,5 +1,5 @@
 #!/usr/local/bin/nush
-(load "RadHTTP:macros")
+(load "NuHTTP:macros")
 
 (get "/" "Hi there")
 
@@ -17,5 +17,5 @@
 
 (delete "/delete" "DELETE")
 
-(RadLibEVHTPServer run)
+(NuLibEVHTPServer run)
 

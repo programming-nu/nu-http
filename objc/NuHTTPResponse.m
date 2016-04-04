@@ -1,13 +1,13 @@
 //
-//  RadHTTPResponse.m
-//  RadHTTP
+//  NuHTTPResponse.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
-#import "RadHTTPResponse.h"
+#import "NuHTTPResponse.h"
 
-@implementation RadHTTPResponse
+@implementation NuHTTPResponse
 @synthesize status, headers, body = _body, exit;
 
 - (id) init 

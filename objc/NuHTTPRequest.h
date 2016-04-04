@@ -1,19 +1,19 @@
 //
-//  RadHTTPRequest.h
-//  RadHTTP
+//  NuHTTPRequest.h
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 
-@class RadHTTPServer;
+@class NuHTTPServer;
 
-@protocol RadHTTPResponder <NSObject>
+@protocol NuHTTPResponder <NSObject>
 - (void) respondWithMessageData:(NSData *) data;
 @end
 
-@interface RadHTTPRequest : NSObject
+@interface NuHTTPRequest : NSObject
 @property (nonatomic, strong) NSURL *URL;
 @property (nonatomic, strong) NSString *method;
 @property (nonatomic, strong) NSDictionary *headers;
@@ -28,8 +28,8 @@
 - (NSDictionary *) post;
 - (NSString *) hostWithPort;
 
-@property (nonatomic, weak) id<RadHTTPResponder> connection;
-@property (nonatomic, weak) RadHTTPServer *server;
+@property (nonatomic, weak) id<NuHTTPResponder> connection;
+@property (nonatomic, weak) NuHTTPServer *server;
 @property (nonatomic, assign) void *context;
 
 @end

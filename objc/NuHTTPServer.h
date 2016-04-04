@@ -1,25 +1,25 @@
 //
-//  RadHTTPServer.h
-//  RadHTTP
+//  NuHTTPServer.h
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 
-@class RadHTTPService;
+@class NuHTTPService;
 
 //
-// RadHTTPServer
+// NuHTTPServer
 // A common interface for Objective-C web servers
 //
-@interface RadHTTPServer : NSObject 
+@interface NuHTTPServer : NSObject 
 @property (nonatomic, assign) unsigned port;
 @property (nonatomic, assign) BOOL localOnly;
 @property (nonatomic, assign) BOOL verbose;
-@property (nonatomic, strong) RadHTTPService *service;
+@property (nonatomic, strong) NuHTTPService *service;
 
-- (id)initWithService:(RadHTTPService *) service;
+- (id)initWithService:(NuHTTPService *) service;
 - (void) start;
 - (void) run;
 - (void) addEventWithOperation:(NSOperation *) operation;

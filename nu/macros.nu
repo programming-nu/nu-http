@@ -1,12 +1,12 @@
 ;; to update the associated source file, run this:
-;; nubake RadHTTPServer+Baked.nu --method macros --category Baked --class RadHTTPServer
+;; nubake NuHTTPServer+Baked.nu --method macros --category Baked --class NuHTTPServer
 
 (macro _httphandler (method path body)
-       `((RadHTTPService sharedService)
+       `((NuHTTPService sharedService)
          addHandlerWithHTTPMethod:,method
          path:,path
          block:(do (REQUEST)
-                   (set RESPONSE ((RadHTTPResponse alloc) init))
+                   (set RESPONSE ((NuHTTPResponse alloc) init))
                    ((REQUEST bindings) each:(do (key value) (_parser setValue:value forKey:key)))
                    (set result nil)
                    (try (set result (progn ,@body))
@@ -41,7 +41,7 @@
 ;; Use this to declare "get" handlers for files in a specified directory.
 
 (macro files (path directory)
-       `((RadHTTPService sharedService)
+       `((NuHTTPService sharedService)
          addHandlerWithPath:,path directory:,directory))
 
 ;; Use these additional macros to declare WebDAV actions.

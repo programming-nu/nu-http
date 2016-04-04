@@ -1,16 +1,16 @@
 //
-//  RadCocoaHTTPServer.m
-//  RadHTTP
+//  NuCocoaHTTPServer.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 5/16/13.
 //  Copyright (c) 2013 Radtastical Inc. All rights reserved.
 //
 #ifndef LINUX
 
-#import "RadCocoaHTTPServer.h"
-#import "RadHTTPRequest.h"
-#import "RadHTTPResponse.h"
-#import "RadHTTPService.h"
+#import "NuCocoaHTTPServer.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPResponse.h"
+#import "NuHTTPService.h"
 
 #import <sys/socket.h>  // for AF_INET, PF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 #import <netinet/in.h>  // for IPPROTO_TCP, sockaddr_in
@@ -18,17 +18,17 @@
 #include <arpa/inet.h>  // inet_ntoa
 
 //
-// RadCocoaHTTPConnection
+// NuCocoaHTTPConnection
 // A model for a web server's connection to a client.
-// A RadHTTPConnection manages the connection between the RadHTTP server and a client.
-// It is created by RadHTTPServer instances in response to a new connection.
-// The RadHTTPConnection then receives data and constructs request objects to
+// A NuHTTPConnection manages the connection between the NuHTTP server and a client.
+// It is created by NuHTTPServer instances in response to a new connection.
+// The NuHTTPConnection then receives data and constructs request objects to
 // represent each complete request that it receives.
 //
-@interface RadCocoaHTTPConnection : NSObject <RadHTTPResponder>
+@interface NuCocoaHTTPConnection : NSObject <NuHTTPResponder>
 
 @property (nonatomic, strong) NSFileHandle *fileHandle;
-@property (nonatomic, weak) RadHTTPServer *server;
+@property (nonatomic, weak) NuHTTPServer *server;
 @property (nonatomic, assign) CFHTTPMessageRef message;
 @property (nonatomic, assign) BOOL isMessageComplete;
 @property (nonatomic, assign) BOOL isMessageHeaderComplete;
@@ -36,12 +36,12 @@
 @property (nonatomic, assign) int contentLength;
 @property (nonatomic, strong) NSString *clientAddress;
 
-- (id) initWithFileHandle:(NSFileHandle *) fileHandle server:(RadHTTPServer *) server;
+- (id) initWithFileHandle:(NSFileHandle *) fileHandle server:(NuHTTPServer *) server;
 - (void) respondWithMessageData:(NSData *) messageData;
 
 @end
 
-@implementation NSFileHandle (RadHTTP)
+@implementation NSFileHandle (NuHTTP)
 
 - (NSString *) remoteAddress
 {
@@ -66,12 +66,12 @@
 
 @end
 
-@interface RadHTTPServer ()
-- (void) closeConnectionAndContinue:(RadCocoaHTTPConnection *) connection;
+@interface NuHTTPServer ()
+- (void) closeConnectionAndContinue:(NuCocoaHTTPConnection *) connection;
 - (void) addRequest:(id) request;
 @end
 
-@implementation RadCocoaHTTPConnection
+@implementation NuCocoaHTTPConnection
 @synthesize fileHandle = _fileHandle;
 @synthesize server = _server;
 @synthesize message = _message;
@@ -81,7 +81,7 @@
 @synthesize contentLength = _contentLength;
 @synthesize clientAddress = _clientAddress;
 
-- (id) initWithFileHandle:(NSFileHandle *) fileHandle server:(RadHTTPServer *) server
+- (id) initWithFileHandle:(NSFileHandle *) fileHandle server:(NuHTTPServer *) server
 {
     if ((self = [super init])) {
         self.fileHandle = fileHandle;
@@ -109,7 +109,7 @@
 
 - (id) requestForIncomingMessage
 {
-    RadHTTPRequest *request = [[RadHTTPRequest alloc] init];
+    NuHTTPRequest *request = [[NuHTTPRequest alloc] init];
     CFURLRef URL = CFHTTPMessageCopyRequestURL(self.message);
     request.URL = (__bridge NSURL *) URL;
     CFStringRef method = CFHTTPMessageCopyRequestMethod(self.message);
@@ -189,7 +189,7 @@
 @end
 
 
-NSData *messageDataForResponse(RadHTTPResponse *response)
+NSData *messageDataForResponse(NuHTTPResponse *response)
 {
     // Create the response message.
     CFHTTPMessageRef message = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
@@ -216,24 +216,24 @@ NSData *messageDataForResponse(RadHTTPResponse *response)
     return (__bridge_transfer NSData *) messageData;
 }
 
-@interface RadCocoaHTTPServer ()
+@interface NuCocoaHTTPServer ()
 @property (nonatomic, strong) NSFileHandle *fileHandle;
 @property (nonatomic, strong) NSMutableArray *connections;
 @property (nonatomic, strong) NSMutableArray *requests;
 @property (nonatomic, assign) BOOL asynchronous;
 
-- (void)closeConnectionAndContinue:(RadCocoaHTTPConnection *)connection;
+- (void)closeConnectionAndContinue:(NuCocoaHTTPConnection *)connection;
 @end
 
-@implementation RadCocoaHTTPServer
+@implementation NuCocoaHTTPServer
 
 #if !TARGET_OS_IPHONE
 + (void) load {
-    //[RadHTTPServer macros];
+    //[NuHTTPServer macros];
 }
 #endif
 
-- (id)initWithService:(RadHTTPService *) service
+- (id)initWithService:(NuHTTPService *) service
 {
     if (self = [super initWithService:service]) {
 #if !TARGET_OS_IPHONE
@@ -319,7 +319,7 @@ static void sig_int(int sig)
 - (void)processNextRequest:(id)sender
 {
     if ([self.requests count] > 0) {
-		RadHTTPRequest *request = [self.requests objectAtIndex:0];
+		NuHTTPRequest *request = [self.requests objectAtIndex:0];
         if (self.verbose) {
             NSLog(@"%@ %@\n%@",
                   request.method,
@@ -332,9 +332,9 @@ static void sig_int(int sig)
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
             dispatch_async(queue, ^{
                 @try {
-                    RadHTTPResponse *response = [self.service responseForHTTPRequest:request];
+                    NuHTTPResponse *response = [self.service responseForHTTPRequest:request];
                     if (!response) {
-                        response = [[RadHTTPResponse alloc] init];
+                        response = [[NuHTTPResponse alloc] init];
                         response.status = 404;
                         response.body = [@"Resource not found" dataUsingEncoding:NSUTF8StringEncoding];
                     }
@@ -349,9 +349,9 @@ static void sig_int(int sig)
             });
         } else {
             @try {
-                RadHTTPResponse *response = [self.service responseForHTTPRequest:request];
+                NuHTTPResponse *response = [self.service responseForHTTPRequest:request];
                 if (!response) {
-                    response = [[RadHTTPResponse alloc] init];
+                    response = [[NuHTTPResponse alloc] init];
                     response.status = 404;
                     response.body = [@"Resource not found" dataUsingEncoding:NSUTF8StringEncoding];
                 }
@@ -380,8 +380,8 @@ static void sig_int(int sig)
     } else {
         NSFileHandle *remoteFileHandle = [userInfo objectForKey:NSFileHandleNotificationFileHandleItem];
         if (remoteFileHandle) {
-            RadCocoaHTTPConnection *connection =
-            [[RadCocoaHTTPConnection alloc]
+            NuCocoaHTTPConnection *connection =
+            [[NuCocoaHTTPConnection alloc]
              initWithFileHandle:remoteFileHandle server:self];
             if (connection) {
                 [self.connections addObject:connection];
@@ -391,7 +391,7 @@ static void sig_int(int sig)
     [self.fileHandle acceptConnectionInBackgroundAndNotify];
 }
 
-- (void)closeConnectionAndContinue:(RadCocoaHTTPConnection *)connection;
+- (void)closeConnectionAndContinue:(NuCocoaHTTPConnection *)connection;
 {
     [self.connections removeObjectIdenticalTo:connection];
     [self processNextRequestOnMainEventLoop];

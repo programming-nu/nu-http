@@ -1,20 +1,20 @@
 //
-//  RadHTTPServer.m
-//  RadHTTP
+//  NuHTTPServer.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
-#import "RadHTTPServer.h"
-#import "RadHTTPService.h"
+#import "NuHTTPServer.h"
+#import "NuHTTPService.h"
 
-#import "RadCocoaHTTPServer.h"
-#import "RadLibEVHTPServer.h"
+#import "NuCocoaHTTPServer.h"
+#import "NuLibEVHTPServer.h"
 
-@implementation RadHTTPServer
+@implementation NuHTTPServer
 @synthesize service = _service, port, localOnly, verbose;
 
-- (id)initWithService:(RadHTTPService *) service
+- (id)initWithService:(NuHTTPService *) service
 {
     if (self = [super init]) {
         self.service = service;
@@ -42,7 +42,7 @@
 
 - (id) init
 {
-    return [self initWithService:[RadHTTPService sharedService]];
+    return [self initWithService:[NuHTTPService sharedService]];
 }
 
 - (void) start
@@ -57,11 +57,11 @@
 
 + (void) run
 {
-    if ([self isEqual:[RadHTTPServer class]]) {
+    if ([self isEqual:[NuHTTPServer class]]) {
 #ifdef DARWIN
-        [[[RadCocoaHTTPServer alloc] init] run];
+        [[[NuCocoaHTTPServer alloc] init] run];
 #else
-        [[[RadLibEVHTPServer alloc] init] run];
+        [[[NuLibEVHTPServer alloc] init] run];
 #endif
     } else {
         [[[self alloc] init] run];

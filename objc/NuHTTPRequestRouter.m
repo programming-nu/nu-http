@@ -1,22 +1,22 @@
-#import "RadHTTPRequestHandler.h"
-#import "RadHTTPRequestRouter.h"
-#import "RadHTTPRequest.h"
-#import "RadHTTPResponse.h"
+#import "NuHTTPRequestHandler.h"
+#import "NuHTTPRequestRouter.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPResponse.h"
 
-@interface RadHTTPRequestHandler ()
+@interface NuHTTPRequestHandler ()
 @property (nonatomic, strong) NSArray *parts; // used to expand pattern for request routing
 @end
 
-@interface RadHTTPRequestRouter ()
+@interface NuHTTPRequestRouter ()
 @property (nonatomic, strong) NSMutableDictionary *keyHandlers;
 @property (nonatomic, strong) NSMutableArray *patternHandlers;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) RadHTTPRequestHandler *handler;
+@property (nonatomic, strong) NuHTTPRequestHandler *handler;
 
 // private methods
-+ (RadHTTPRequestRouter *) routerWithToken:(id) token;
-- (void) insertHandler:(RadHTTPRequestHandler *) handler level:(NSUInteger) level;
-- (RadHTTPResponse *) routeAndHandleRequest:(RadHTTPRequest *) request parts:(NSArray *) parts level:(NSUInteger) level;
++ (NuHTTPRequestRouter *) routerWithToken:(id) token;
+- (void) insertHandler:(NuHTTPRequestHandler *) handler level:(NSUInteger) level;
+- (NuHTTPResponse *) routeAndHandleRequest:(NuHTTPRequest *) request parts:(NSArray *) parts level:(NSUInteger) level;
 
 @end
 
@@ -29,12 +29,12 @@ static NSString *spaces(int n)
     return result;
 }
 
-@implementation RadHTTPRequestRouter
+@implementation NuHTTPRequestRouter
 @synthesize keyHandlers, patternHandlers, token, handler;
 
-+ (RadHTTPRequestRouter *) routerWithToken:(NSString *) token
++ (NuHTTPRequestRouter *) routerWithToken:(NSString *) token
 {
-    RadHTTPRequestRouter *router = [[self alloc] init];
+    NuHTTPRequestRouter *router = [[self alloc] init];
 	router.token = [token copy];
     return router;
 }
@@ -79,9 +79,9 @@ static NSString *spaces(int n)
     return [self descriptionWithLevel:0];
 }
 
-- (RadHTTPResponse *) routeAndHandleRequest:(RadHTTPRequest *) request parts:(NSArray *) parts level:(NSUInteger) level
+- (NuHTTPResponse *) routeAndHandleRequest:(NuHTTPRequest *) request parts:(NSArray *) parts level:(NSUInteger) level
 {
-    RadHTTPResponse *response = nil;
+    NuHTTPResponse *response = nil;
     if (level == [parts count]) {
         @try
         {
@@ -90,7 +90,7 @@ static NSString *spaces(int n)
         @catch (id exception) {
             NSLog(@"Handler exception: %@ %@", [exception description], [request description]);
             if (YES) {  // DEBUGGING
-                RadHTTPResponse *response = [[RadHTTPResponse alloc] init];
+                NuHTTPResponse *response = [[NuHTTPResponse alloc] init];
                 [response setValue:@"text/plain" forHTTPHeader:@"Content-Type"];
                 response.body = [[exception description] dataUsingEncoding:NSUTF8StringEncoding];
             }
@@ -134,7 +134,7 @@ static NSString *spaces(int n)
     }
 }
 
-- (void) insertHandler:(RadHTTPRequestHandler *) h level:(NSUInteger) level
+- (void) insertHandler:(NuHTTPRequestHandler *) h level:(NSUInteger) level
 {
     if (level == [h.parts count]) {
         self.handler = h;
@@ -144,7 +144,7 @@ static NSString *spaces(int n)
         BOOL key_is_pattern = ([key length] > 0) && ([key characterAtIndex:([key length] - 1)] == ':');
         id child = key_is_pattern ? nil : [self.keyHandlers objectForKey:key];
         if (!child) {
-            child = [RadHTTPRequestRouter routerWithToken:key];
+            child = [NuHTTPRequestRouter routerWithToken:key];
         }
         if (key_is_pattern) {
             [self.patternHandlers addObject:child];
@@ -156,7 +156,7 @@ static NSString *spaces(int n)
     }
 }
 
-- (RadHTTPResponse *) responseForHTTPRequest:(RadHTTPRequest *) request
+- (NuHTTPResponse *) responseForHTTPRequest:(NuHTTPRequest *) request
 {
     id httpMethod = request.method;
     NSArray *parts = [[NSString stringWithFormat:@"%@%@", httpMethod, [request path]]
@@ -164,7 +164,7 @@ static NSString *spaces(int n)
     if (([parts count] > 2) && [[parts lastObject] isEqualToString:@""]) {
         parts = [parts subarrayWithRange:NSMakeRange(0, [parts count]-1)];
     }
-    RadHTTPResponse *response = [self routeAndHandleRequest:request
+    NuHTTPResponse *response = [self routeAndHandleRequest:request
                                                       parts:parts
                                                       level:0];
     

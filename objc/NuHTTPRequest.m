@@ -1,15 +1,15 @@
 //
-//  RadHTTPRequest.m
-//  RadHTTP
+//  NuHTTPRequest.m
+//  NuHTTP
 //
 //  Created by Tim Burks on 2/24/12.
 //  Copyright (c) 2012 Radtastical Inc. All rights reserved.
 //
-#import "RadHTTPRequest.h"
-#import "RadHTTPHelpers.h"
+#import "NuHTTPRequest.h"
+#import "NuHTTPHelpers.h"
 #import <Nu/Nu.h>
 
-@implementation RadHTTPRequest
+@implementation NuHTTPRequest
 @synthesize URL, headers, body, context, method, connection, bindings, server, scheme;
 
 - (id) init {
